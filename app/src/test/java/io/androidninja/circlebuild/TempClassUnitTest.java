@@ -12,4 +12,10 @@ public class TempClassUnitTest {
         assertEquals(4, tempClass.add(2,2));
     }
 
+    @Test
+    public void subtraction_isCorrect() throws Exception {
+        TempClass tempClass = new TempClass();
+        assertEquals(2, tempClass.sub(4,2));
+    }
+
 }
