@@ -5,11 +5,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import io.androidninja.CircleCiClient;
+import io.androidninja.Response;
+import io.androidninja.models.Project;
+import java.util.List;
 
 public class LaunchActivity extends AppCompatActivity {
+
+    static final String TAG = LaunchActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +54,22 @@ public class LaunchActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        CircleCiClient circleCiClient = new CircleCiClient("[ENTER CIRCLE CI TOKEN HERE]");
+        circleCiClient.getProjects(new Response<List<Project>>() {
+            @Override
+            public void onSuccess(List<Project> data) {
+                Log.d(TAG, "onSuccess: "+data.get(0).toString());
+            }
+
+            @Override
+            public void onFailure(String errorMessage) {
+                Log.e(TAG, "onFailure: "+errorMessage);
+            }
+        });
     }
 }
