@@ -1,4 +1,4 @@
-package io.androidninja.circlebuild.Launch;
+package io.androidninja.circlebuild.launch;
 
 import android.os.Bundle;
 import android.support.design.widget.BaseTransientBottomBar;
@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -20,6 +19,7 @@ import io.androidninja.circlebuild.Utils.NetworkUtils;
 import io.androidninja.circlebuild.Utils.PrefUtils;
 import io.androidninja.circlebuild.Utils.StringUtils;
 import io.androidninja.circlebuild.Utils.UIUtils;
+import io.androidninja.circlebuild.projects.ProjectsActivity;
 import io.androidninja.models.Project;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +90,7 @@ public class LaunchActivity extends AppCompatActivity implements LaunchContract.
 
     @Override
     public void goToProjects(List<Project> projects) {
-        Toast.makeText(this, "Your in!", Toast.LENGTH_SHORT).show();
+        ProjectsActivity.launch(this);
     }
 
     @Override

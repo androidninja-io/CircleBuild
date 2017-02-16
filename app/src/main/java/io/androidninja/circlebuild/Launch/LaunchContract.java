@@ -1,4 +1,4 @@
-package io.androidninja.circlebuild.Launch;
+package io.androidninja.circlebuild.launch;
 
 import io.androidninja.circlebuild.BasePresenter;
 import io.androidninja.circlebuild.BaseView;
