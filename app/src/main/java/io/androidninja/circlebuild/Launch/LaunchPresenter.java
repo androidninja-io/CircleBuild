@@ -1,4 +1,4 @@
-package io.androidninja.circlebuild.Launch;
+package io.androidninja.circlebuild.launch;
 
 import io.androidninja.CircleCiClient;
 import io.androidninja.Response;
