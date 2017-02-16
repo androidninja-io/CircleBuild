@@ -9,10 +9,13 @@ public interface ProjectsContract {
         void showProgress(boolean show);
         void showProjects(List<Project> projects);
         void showError(String message);
+        void goToProject(Project project);
     }
 
     interface Presenter {
         void loadProjects();
+        void projectClicked(Project project);
+
     }
 
     interface ProjectSelectedListener {
