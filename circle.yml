@@ -13,15 +13,15 @@ machine:
 dependencies:
     override:
         - echo y | android update sdk --no-ui --all --filter tools,platform-tools,android-25,extra-android-m2repository,extra-google-m2repository,extra-google-google_play_services,extra-android-support
-        - echo y | android update sdk --no-ui --all --filter build-tools-25.0.2
+        - echo y | android update sdk --no-ui --all --filter build-tools-25.0.1
 
 test:
   override:
-    - ./gradlew testDebugUnitTest
+    - ./gradlew testProdDebugUnitTest
     - mkdir -p $CIRCLE_TEST_REPORTS/reports/
-    - cp -avr app/build/reports/tests/debug/ $CIRCLE_TEST_REPORTS/reports/
+    - cp -avr app/build/reports/tests/prodDebug/ $CIRCLE_TEST_REPORTS/reports/
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-    - find . -type f -regex ".*/build/test-results/debug/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    - find . -type f -regex ".*/build/test-results/prodDebug/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
   post:
-    - ./gradlew jacocoTestDebugUnitTestReport
+    - ./gradlew jacocoTestProdDebugUnitTestReport
     - bash <(curl -s https://codecov.io/bash)
