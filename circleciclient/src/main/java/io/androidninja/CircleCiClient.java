@@ -1,5 +1,6 @@
 package io.androidninja;
 
+import io.androidninja.models.Artifact;
 import io.androidninja.models.Project;
 import java.util.List;
 import retrofit2.Call;
@@ -26,7 +27,7 @@ public class CircleCiClient {
         service = retrofit.create(CircleCiService.class);
     }
 
-    public void getProjects(final io.androidninja.Response<List<Project>> callback) {
+    public void getProjects(final Response<List<Project>> callback) {
         validateToken(token);
         Call<List<Project>> call = service.getProjects(token);
 
@@ -44,6 +45,28 @@ public class CircleCiClient {
             @Override
             public void onFailure(Call<List<Project>> call, Throwable t) {
                 callback.onFailure(t.getMessage());
+            }
+        });
+    }
+
+    public void getArtifacts(String vcs_type, String project, String userName, String branch, final Response<List<Artifact>> callBack) {
+        validateToken(token);
+        Call<List<Artifact>> call = service.getArtifacts(vcs_type, project, userName, token, branch, "successful");
+
+        call.enqueue(new Callback<List<Artifact>>() {
+            @Override
+            public void onResponse(Call<List<Artifact>> call, retrofit2.Response<List<Artifact>> response) {
+                if(response.isSuccessful()) {
+                    List<Artifact> artifacts = response.body();
+                    callBack.onSuccess(artifacts);
+                } else {
+                    callBack.onFailure(response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Artifact>> call, Throwable t) {
+                callBack.onFailure(t.getMessage());
             }
         });
     }

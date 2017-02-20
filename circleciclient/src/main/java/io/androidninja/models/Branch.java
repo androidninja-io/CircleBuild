@@ -9,6 +9,12 @@ public class Branch {
     Build last_success;
     ArrayList<String> pusher_logins;
 
+    public static final int BUILD_SUCCESS = 0;
+    public static final int BUILD_FAILURE = 1;
+    public static final int BUILD_RUNNING = 2;
+    public static final int BUILD_SKIPPED = 3;
+
+
     public ArrayList<Build> getRunningBuilds() {
         return running_builds;
     }
@@ -27,6 +33,23 @@ public class Branch {
 
     public ArrayList<String> getPusherLogins() {
         return pusher_logins;
+    }
+
+    public int getCurrentStatus() {
+        int successBuildNum = getLastSuccess() != null ? getLastSuccess().getBuildNumber() : 0;
+        int failureBuildNum = getLastNonSuccess() != null ? getLastNonSuccess().getBuildNumber() : 0;
+        int runningBuildNum = getRunningBuilds().size() > 0 ? getRunningBuilds().get(0).getBuildNumber() : 0;
+
+        if(successBuildNum > failureBuildNum && successBuildNum > runningBuildNum) {
+            return 0;
+        } else if (failureBuildNum > runningBuildNum) {
+            return 1;
+        } else if (successBuildNum == failureBuildNum && successBuildNum == runningBuildNum) {
+            return 3;
+        } else {
+            return 2;
+        }
+
     }
 
     @Override
