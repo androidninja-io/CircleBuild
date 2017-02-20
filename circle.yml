@@ -25,3 +25,10 @@ test:
   post:
     - ./gradlew jacocoTestProdDebugUnitTestReport
     - bash <(curl -s https://codecov.io/bash)
+
+deployment:
+  makeapk:
+    branch: [develop, master]
+    commands:
+    - ./gradlew assembleProdDebug
+    - cp -avr app/build/outputs/apk/ $CIRCLE_ARTIFACTS
