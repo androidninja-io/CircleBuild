@@ -28,7 +28,8 @@ test:
 
 deployment:
   makeapk:
-    branch: [develop, master]
+    branch: /.*/
     commands:
+    - ./gradlew assembleProdRelease
     - ./gradlew assembleProdDebug
     - cp -avr app/build/outputs/apk/ $CIRCLE_ARTIFACTS
