@@ -40,4 +40,9 @@ public class ProjectsPresenter implements ProjectsContract.Presenter {
             view.showError("Check Network Connection");
         }
     }
+
+    @Override
+    public void projectClicked(Project project) {
+        view.goToProject(project);
+    }
 }

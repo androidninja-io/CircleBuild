@@ -3,4 +3,6 @@
   <string name="action_settings">Settings</string>
   <string name="enter_circleci_token">Enter CircleCi Token</string>
   <string name="title_activity_projects">Projects</string>
+  <string name="title_activity_project_detail">Project Details</string>
+  <string name="section_format">Hello World from section: %1$d</string>
 </resources>

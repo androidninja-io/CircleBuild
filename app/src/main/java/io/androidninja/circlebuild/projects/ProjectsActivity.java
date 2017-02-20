@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.androidninja.CircleCiClient;
@@ -18,6 +17,7 @@ import io.androidninja.circlebuild.R;
 import io.androidninja.circlebuild.Utils.NetworkUtils;
 import io.androidninja.circlebuild.Utils.PrefUtils;
 import io.androidninja.circlebuild.Utils.UIUtils;
+import io.androidninja.circlebuild.projectdetails.ProjectDetailActivity;
 import io.androidninja.models.Project;
 import java.util.List;
 
@@ -51,11 +51,6 @@ public class ProjectsActivity extends AppCompatActivity implements ProjectsContr
         PrefUtils prefUtils = new PrefUtils(this);
         CircleCiClient circleCiClient = new CircleCiClient(prefUtils.getCircleCiToken());
         presenter = new ProjectsPresenter(this, circleCiClient, new NetworkUtils(this));
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
         presenter.loadProjects();
     }
 
@@ -94,7 +89,12 @@ public class ProjectsActivity extends AppCompatActivity implements ProjectsContr
     }
 
     @Override
+    public void goToProject(Project project) {
+        ProjectDetailActivity.launch(this, project);
+    }
+
+    @Override
     public void projectSelected(Project project) {
-        Toast.makeText(this, project.getReponame(), Toast.LENGTH_SHORT).show();
+        presenter.projectClicked(project);
     }
 }
