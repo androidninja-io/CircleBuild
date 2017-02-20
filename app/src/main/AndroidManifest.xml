@@ -27,8 +27,15 @@
         android:theme="@style/AppTheme.NoActionBar" />
     <activity android:name=".projectdetails.ProjectDetailActivity"
         android:label="@string/title_activity_project_detail"
-        android:theme="@style/AppTheme.NoActionBar"
-        android:parentActivityName=".projects.ProjectsActivity"/>
+        android:parentActivityName=".projects.ProjectsActivity"
+        android:theme="@style/AppTheme.NoActionBar" />
+    <activity android:name=".artifacts.ArtifactsActivity"
+        android:label="@string/title_activity_artifacts"
+        android:parentActivityName=".projectdetails.ProjectDetailActivity"
+        android:theme="@style/AppTheme.NoActionBar">
+      <meta-data android:name="android.support.PARENT_ACTIVITY"
+          android:value="io.androidninja.circlebuild.projectdetails.ProjectDetailActivity" />
+    </activity>
   </application>
 
 </manifest>

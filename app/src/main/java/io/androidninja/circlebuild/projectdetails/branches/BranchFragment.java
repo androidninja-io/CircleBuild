@@ -9,13 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import io.androidninja.circlebuild.R;
+import io.androidninja.circlebuild.Utils.Pair;
+import io.androidninja.circlebuild.artifacts.ArtifactsActivity;
 import io.androidninja.models.Branch;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * A fragment representing a list of Items.
  */
-public class BranchFragment extends Fragment implements BranchContract.View {
+public class BranchFragment extends Fragment implements BranchContract.View, MyBranchRecyclerViewAdapter.BranchClickListener {
 
     private static final String ARG_PROJECT_JSON = "project_json";
     private HashMap<String, Branch> branches;
@@ -64,7 +67,17 @@ public class BranchFragment extends Fragment implements BranchContract.View {
     }
 
     @Override
-    public void showBranches(String[] branches) {
-        recyclerView.setAdapter(new MyBranchRecyclerViewAdapter(branches));
+    public void showBranches(List<Pair<String, Branch>> branches) {
+        recyclerView.setAdapter(new MyBranchRecyclerViewAdapter(branches, this));
+    }
+
+    @Override
+    public void showBuildArtifacts(String vcs, String project, String userName, String branch) {
+        ArtifactsActivity.launch(this.getContext(), vcs, project, userName, branch);
+    }
+
+    @Override
+    public void onClick(String branchName, Branch branch) {
+        presenter.branchClicked(branchName);
     }
 }

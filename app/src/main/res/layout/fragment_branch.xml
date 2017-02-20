@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+  <ImageView
+      android:id="@+id/branch_status"
+      android:layout_width="8dp"
+      android:layout_height="8dp"
+      android:layout_margin="16dp"
+      android:src="@drawable/build_status_failure"/>
+
+  <ImageView
+      android:id="@+id/branch_default"
+      android:layout_alignParentRight="true"
+      android:layout_width="18dp"
+      android:layout_height="18dp"
+      android:layout_marginRight="16dp"
+      android:layout_marginLeft="16dp"
+      android:layout_centerVertical="true"
+      android:tint="@color/colorAccent"
+      android:src="@drawable/ic_favorite"/>
 
   <TextView
       android:id="@+id/branch_name"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_margin="@dimen/text_margin"
-      android:layout_marginLeft="32dp"
-      android:textAppearance="?attr/textAppearanceListItem" />
-</LinearLayout>
+      android:layout_centerVertical="true"
+      android:textAppearance="?attr/textAppearanceListItem"
+      android:maxLines="2"
+      android:ellipsize="end"
+      android:layout_toRightOf="@id/branch_status"
+      android:layout_toLeftOf="@id/branch_default"
+      android:text="Branch Name"/>
+
+</RelativeLayout>
